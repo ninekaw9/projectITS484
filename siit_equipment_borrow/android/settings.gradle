@@ -1,0 +1,3 @@
+rootProject.name = 'siit_equipment_borrow'
+
+include ':app'
