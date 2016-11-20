@@ -12,7 +12,7 @@ import {
   Text,
   View,
   TouchableHighlight,
-  AlertIOS,
+  Alert,
 } from 'react-native';
 const firebase = require('firebase');
 const StatusBar = require('./components/StatusBar.js');
@@ -86,15 +86,15 @@ export default class siit_equipment_borrow extends Component {
   }
 
   _addItem() {
-    AlertIOS.prompt(
+    Alert.alert(
       'Add New Item',
       null,
       [
         {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
         {
           text: 'Add',
-          onPress: (text) => {
-            this.itemsRef.push({ title: text })
+          onPress: () => {
+            this.itemsRef.push({ title: 'test' })
           }
         },
       ],
@@ -105,7 +105,7 @@ export default class siit_equipment_borrow extends Component {
   _renderItem(item) {
 
     const onPress = () => {
-      AlertIOS.alert(
+      Alert.alert(
         'Complete',
         null,
         [
