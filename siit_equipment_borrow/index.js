@@ -11,6 +11,16 @@ import {
   Text,
   View
 } from 'react-native';
+import * as firebase from 'firebase';
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCsVLTT_5zWzeGn0f77xD97k8itJQbEOYU",
+    authDomain: "siit-equipment-audit.firebaseapp.com",
+    databaseURL: "https://siit-equipment-audit.firebaseio.com",
+    storageBucket: "siit-equipment-audit.appspot.com",
+    messagingSenderId: "178324219535"
+  };
+  firebase.initializeApp(config);
 
 export default class siit_equipment_borrow extends Component {
   render() {
