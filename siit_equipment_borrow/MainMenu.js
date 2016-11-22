@@ -45,7 +45,9 @@ class MainMenu extends Component{
           <Text>{data.price}</Text>
           <Text>{data.purchasedYear}</Text>
           <Text>{data.status}</Text>
+          <View style={{height:1, backgroundColor: 'lightgray'}}></View>
         </View>
+        
       );
   }
 
@@ -63,8 +65,6 @@ class MainMenu extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
     padding: 10,
     marginTop: 50,
