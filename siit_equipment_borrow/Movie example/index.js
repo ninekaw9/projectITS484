@@ -4,17 +4,12 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  StatusBar,
-  TouchableHighlight,
-  Navigator,
-} from 'react-native';
-import *  as firebase from 'firebase';
+import React, {Component} from 'react';
+import {Navigator, StatusBar, TouchableHighlight,
+   AppRegistry, StyleSheet, Text, View} from 'react-native';
+import ListScreen from './listScreen.js';
+import DetailScreen from './detailScreen.js';
+const firebase = require('firebase');
 const firebaseConfig = {
     apiKey: "AIzaSyCsVLTT_5zWzeGn0f77xD97k8itJQbEOYU",
     authDomain: "siit-equipment-audit.firebaseapp.com",
@@ -22,26 +17,23 @@ const firebaseConfig = {
     storageBucket: "siit-equipment-audit.appspot.com",
     messagingSenderId: "178324219535"
   };
-  firebase.initializeApp(firebaseConfig);
-import MainMenu from './MainMenu.js';
-  const routes= [
-    {
-      title: 'Main Menu',
-      index: 0,
-    },
-  ]
-export default class siit_equipment_borrow extends Component {
-
-  constructor(props){
-    super(props);
-    
+  const firebaseApp = firebase.initializeApp(firebaseConfig);
+const routes = [
+  {
+    title: 'Movie Explorer',
+    index: 0
+  }, {
+    title: 'Movie Detail',
+    index: 1
   }
+]
 
+class siit_equipment_borrow extends Component {
   render() {
     return (
       <View style={styles.container}>
-      <StatusBar
-          backgroundColor="blue"
+        <StatusBar
+          backgroundColor="darkred"
           barStyle="light-content"
         />
         <Navigator
@@ -50,7 +42,8 @@ export default class siit_equipment_borrow extends Component {
           renderScene={
             (route, navigator) => {
               switch (route.index) {
-                case 0: return (<MainMenu navigator={navigator} route={routes[route.index]} {...route.passProps}></MainMenu>);
+                case 0: return (<ListScreen navigator={navigator} route={routes[route.index]} {...route.passProps}></ListScreen>);
+                case 1: return (<DetailScreen navigator={navigator} route={routes[route.index]} {...route.passProps}></DetailScreen>);
               }
             }
           }
@@ -78,8 +71,8 @@ export default class siit_equipment_borrow extends Component {
              style={styles.navigationBar}
            />
         }
-        />
-      </View>
+      />
+    </View>
     );
   }
 }
@@ -89,7 +82,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   navigationBar:{
-    backgroundColor: 'blue',
+    backgroundColor: 'darkred',
   },
   navigationBarText:{
     color: 'white',
@@ -102,6 +95,5 @@ const styles = StyleSheet.create({
   }
 
 });
-
 
 AppRegistry.registerComponent('siit_equipment_borrow', () => siit_equipment_borrow);

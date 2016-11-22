@@ -1,1 +1,1 @@
-import a from './index.js'
+import index from './index.js';
