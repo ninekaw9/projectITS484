@@ -24,11 +24,16 @@ const firebaseConfig = {
   };
   firebase.initializeApp(firebaseConfig);
 import MainMenu from './MainMenu.js';
+import ItemDetail from './ItemDetail.js';
   const routes= [
     {
       title: 'Main Menu',
       index: 0,
     },
+    {
+      title: 'Item Detail',
+      index: 1,
+    }
   ]
 export default class siit_equipment_borrow extends Component {
 
@@ -51,6 +56,7 @@ export default class siit_equipment_borrow extends Component {
             (route, navigator) => {
               switch (route.index) {
                 case 0: return (<MainMenu navigator={navigator} route={routes[route.index]} {...route.passProps}></MainMenu>);
+                case 1: return (<ItemDetail navigator={navigator} route={routes[route.index]} {...route.passProps}></ItemDetail>);
               }
             }
           }

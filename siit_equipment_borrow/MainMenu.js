@@ -35,6 +35,14 @@ class MainMenu extends Component{
 
   renderListView(data){
       return(
+        <TouchableOpacity
+        onPress={
+          ()=>this.props.navigator.push({index:1, passProps:
+            {
+              itemID: data.itemID,
+            }})
+        }
+        >
         <View>
           <Text>{data.brand}</Text>
           <Text>{data.description}</Text>
@@ -47,7 +55,7 @@ class MainMenu extends Component{
           <Text>{data.status}</Text>
           <View style={{height:1, backgroundColor: 'lightgray'}}></View>
         </View>
-        
+        </TouchableOpacity>   
       );
   }
 
@@ -68,16 +76,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     padding: 10,
     marginTop: 50,
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
 
