@@ -11,25 +11,59 @@ class MainMenu extends Component{
     // https://facebook.github.io/react-native/docs/listview.html
 
     this.state = {
-      itemsSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
+      itemsSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
+      count: 0,
+      equalToVal: '',
+      orderByChild: '',
+      searchperformed: false,
     };
     this.items=[];
     this.database = firebase.database();
     this.itemsfirebaseRef = this.database.ref('equipData');
+    this.searchandfilter = this.searchandfilter.bind(this);
   }
 
   getitemsfromfirebase(){
-    this.itemsfirebaseRef.on('value', (snapshot) => {
-      console.log("items change:", snapshot.val());
+
+    if(this.state.searchperformed==true){
+    this.itemsfirebaseRef.orderByChild(this.state.orderByChild).equalTo(this.state.equalToVal).once('value', (snapshot) => {
       this.setState({items: snapshot.val()});
-      console.log(this.state.items);
       this.setState({
          itemsSource: this.state.itemsSource.cloneWithRows(this.state.items),
       });
-})
+    })
+    }
+    else if(this.state.searchperformed==false){
+      this.itemsfirebaseRef.once('value', (snapshot) => {
+      this.setState({items: snapshot.val()});
+      this.setState({
+         itemsSource: this.state.itemsSource.cloneWithRows(this.state.items),
+      });
+    })
+    }
   }
 
   componentDidMount(){
+    this.getitemsfromfirebase();
+  }
+
+
+  searchandfilter(searchkey, searchby){
+    console.log(searchkey);
+    console.log(searchby);
+    if(searchkey!=null){
+    this.setState({
+      searchperformed: true,
+      equalToVal: searchkey,
+      orderByChild: searchby,
+    });
+    }
+    else{
+      this.setState({
+      searchperformed: false,
+    });
+    }
+    console.log(this.state.searchperformed);
     this.getitemsfromfirebase();
   }
 
@@ -37,9 +71,19 @@ class MainMenu extends Component{
       return(
         <TouchableOpacity
         onPress={
-          ()=>this.props.navigator.push({index:1, passProps:
+          ()=>this.props.navigator.push({
+            index:1, 
+            passProps:
             {
+              brand: data.brand,
+              description: data.description,
               itemID: data.itemID,
+              itemType: data.itemType,
+              location: data.location,
+              model: data.model,
+              price: data.price,
+              purchasedYear: data.purchasedYear,
+              status: data.status,
             }})
         }
         >
@@ -62,6 +106,20 @@ class MainMenu extends Component{
     render(){
         return (
         <View style={styles.container}>
+          <TouchableOpacity
+             onPress={
+          ()=>this.props.navigator.push({
+            index:3, 
+            passProps:
+            {
+              callback: this.searchandfilter, 
+            }})
+          }
+          ><View style={styles.searchbutton}>
+          <Text>
+          Search and Filter
+          </Text>
+          </View></TouchableOpacity>
           <ListView
             dataSource={this.state.itemsSource}
             renderRow={this.renderListView.bind(this)} />
@@ -77,6 +135,10 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 50,
   },
+  searchbutton:{
+    backgroundColor: 'blue',
+    padding: 10,
+  }
 });
 
 

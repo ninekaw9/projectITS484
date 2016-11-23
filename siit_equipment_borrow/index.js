@@ -25,14 +25,24 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 import MainMenu from './MainMenu.js';
 import ItemDetail from './ItemDetail.js';
+import About from './About.js';
+import Search from './Search.js';
   const routes= [
     {
-      title: 'Main Menu',
+      title: 'Item List',
       index: 0,
     },
     {
       title: 'Item Detail',
       index: 1,
+    },
+    {
+      title: 'About',
+      index: 2,
+    },
+    {
+      title: 'Search and Filter',
+      index: 3,
     }
   ]
 export default class siit_equipment_borrow extends Component {
@@ -57,6 +67,8 @@ export default class siit_equipment_borrow extends Component {
               switch (route.index) {
                 case 0: return (<MainMenu navigator={navigator} route={routes[route.index]} {...route.passProps}></MainMenu>);
                 case 1: return (<ItemDetail navigator={navigator} route={routes[route.index]} {...route.passProps}></ItemDetail>);
+                case 2: return (<About navigator={navigator} route={routes[route.index]} {...route.passProps}></About>);
+                case 3: return (<Search navigator={navigator} route={routes[route.index]} {...route.passProps}></Search>);
               }
             }
           }
@@ -77,7 +89,16 @@ export default class siit_equipment_borrow extends Component {
                    </TouchableHighlight>
                  )
                },
-               RightButton: (route, navigator, index, navState) => { return null; },
+               RightButton: (route, navigator, index, navState) => { 
+                  if (route.index == 2){
+                   return null;
+                 }
+                 return (
+                   <TouchableHighlight onPress={()=>navigator.push({index:2})}>
+                     <Text style={styles.navigationBarText}>About</Text>
+                   </TouchableHighlight>
+                 )
+                },
                Title: (route, navigator, index, navState) =>
                  { return (<Text style={[styles.navigationBarText, styles.titleText]}>{routes[route.index].title}</Text>); },
              }}

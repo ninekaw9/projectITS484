@@ -5,10 +5,21 @@ class ItemDetail extends Component{
      constructor(props) {
         super(props);
     }
+
+
     render(){
+        let ref='MainMenu';
         return(
             <View style={styles.container}>
+                <Text>{this.props.brand}</Text>
+                <Text>{this.props.description}</Text>
                 <Text>{this.props.itemID}</Text>
+             <Text>{this.props.itemType}</Text>
+          <Text>{this.props.location}</Text>
+          <Text>{this.props.model}</Text>
+          <Text>{this.props.price}</Text>
+          <Text>{this.props.purchasedYear}</Text>
+          <Text>{this.props.status}</Text>
             </View>
         );
     }
