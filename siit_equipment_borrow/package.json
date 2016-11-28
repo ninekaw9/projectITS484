@@ -10,7 +10,6 @@
     "firebase": "^3.6.1",
     "react": "15.3.2",
     "react-native": "0.37.0",
-    "react-native-barcode-scanner-universal": "^1.0.5",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git"
   },
   "jest": {
