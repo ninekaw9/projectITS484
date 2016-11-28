@@ -27,6 +27,7 @@ import MainMenu from './MainMenu.js';
 import ItemDetail from './ItemDetail.js';
 import About from './About.js';
 import Search from './Search.js';
+import QRReader from './QRReader.js';
   const routes= [
     {
       title: 'Item List',
@@ -43,6 +44,10 @@ import Search from './Search.js';
     {
       title: 'Search and Filter',
       index: 3,
+    },
+    {
+      title: 'Read QR Code',
+      index: 4,
     }
   ]
 export default class siit_equipment_borrow extends Component {
@@ -69,6 +74,7 @@ export default class siit_equipment_borrow extends Component {
                 case 1: return (<ItemDetail navigator={navigator} route={routes[route.index]} {...route.passProps}></ItemDetail>);
                 case 2: return (<About navigator={navigator} route={routes[route.index]} {...route.passProps}></About>);
                 case 3: return (<Search navigator={navigator} route={routes[route.index]} {...route.passProps}></Search>);
+                case 4: return (<QRReader navigator={navigator} route={routes[route.index]} {...route.passProps}></QRReader>);
               }
             }
           }

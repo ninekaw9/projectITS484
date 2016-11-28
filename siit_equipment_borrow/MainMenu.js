@@ -120,6 +120,20 @@ class MainMenu extends Component{
           Search and Filter
           </Text>
           </View></TouchableOpacity>
+          <TouchableOpacity
+             onPress={
+          ()=>this.props.navigator.push({
+            index:4, 
+            passProps:
+            {
+              callback: this.searchandfilter, 
+            }})
+          }
+          ><View style={styles.searchbutton}>
+          <Text>
+          Scan QR Code
+          </Text>
+          </View></TouchableOpacity>
           <ListView
             dataSource={this.state.itemsSource}
             renderRow={this.renderListView.bind(this)} />

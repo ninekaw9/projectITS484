@@ -44,14 +44,6 @@ class Search extends Component{
             >
             <Text>Perform Search</Text>
             </TouchableOpacity>
-            <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture}>[CAPTURE]</Text>
-        </Camera>
 
         </View>
         );
