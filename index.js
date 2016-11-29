@@ -15,23 +15,21 @@ import {
   Navigator,
 } from 'react-native';
 import *  as firebase from 'firebase';
-const firebaseConfig = {
-    apiKey: "AIzaSyCsVLTT_5zWzeGn0f77xD97k8itJQbEOYU",
-    authDomain: "siit-equipment-audit.firebaseapp.com",
-    databaseURL: "https://siit-equipment-audit.firebaseio.com",
-    storageBucket: "siit-equipment-audit.appspot.com",
-    messagingSenderId: "178324219535"
+const config = {
+    apiKey: "AIzaSyCYBw1eSe5aAMOAiLb5fT6qAbImLhGZkxM",
+    authDomain: "equip-f825e.firebaseapp.com",
+    databaseURL: "https://equip-f825e.firebaseio.com",
+    storageBucket: "equip-f825e.appspot.com",
+    messagingSenderId: "215258062654"
   };
-  firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(config);
 import MainMenu from './MainMenu.js';
 import ItemDetail from './ItemDetail.js';
-import About from './About.js';
-import Search from './Search.js';
-import QRReader from './QRReader.js';
 import ReqForm from './ReqForm.js';
+
   const routes= [
     {
-      title: 'Item List',
+      title: 'Main Menu',
       index: 0,
     },
     {
@@ -39,21 +37,9 @@ import ReqForm from './ReqForm.js';
       index: 1,
     },
     {
-      title: 'About',
+      title: 'Request Form',
       index: 2,
-    },
-    {
-      title: 'Search and Filter',
-      index: 3,
-    },
-    {
-      title: 'Read QR Code',
-      index: 4,
-    },
-    {
-      title: 'Borrow',
-      index: 5,
-    },
+    }
   ]
 export default class siit_equipment_borrow extends Component {
 
@@ -65,10 +51,11 @@ export default class siit_equipment_borrow extends Component {
   render() {
     return (
       <View style={styles.container}>
-      <StatusBar
-          backgroundColor="blue"
+      <View><StatusBar
+          backgroundColor="purple"
           barStyle="light-content"
         />
+        </View>
         <Navigator
           initialRoute={routes[0]}
           initialRouteStack={routes}
@@ -77,10 +64,7 @@ export default class siit_equipment_borrow extends Component {
               switch (route.index) {
                 case 0: return (<MainMenu navigator={navigator} route={routes[route.index]} {...route.passProps}></MainMenu>);
                 case 1: return (<ItemDetail navigator={navigator} route={routes[route.index]} {...route.passProps}></ItemDetail>);
-                case 2: return (<About navigator={navigator} route={routes[route.index]} {...route.passProps}></About>);
-                case 3: return (<Search navigator={navigator} route={routes[route.index]} {...route.passProps}></Search>);
-                case 4: return (<QRReader navigator={navigator} route={routes[route.index]} {...route.passProps}></QRReader>);
-                case 5: return (<ReqForm navigator={navigator} route={routes[route.index]} {...route.passProps}></ReqForm>);
+                case 2: return (<ReqForm navigator={navigator} route={routes[route.index]} {...route.passProps}></ReqForm>);
               }
             }
           }
@@ -101,16 +85,7 @@ export default class siit_equipment_borrow extends Component {
                    </TouchableHighlight>
                  )
                },
-               RightButton: (route, navigator, index, navState) => { 
-                  if (route.index == 2){
-                   return null;
-                 }
-                 return (
-                   <TouchableHighlight onPress={()=>navigator.push({index:2})}>
-                     <Text style={styles.navigationBarText}>About</Text>
-                   </TouchableHighlight>
-                 )
-                },
+               RightButton: (route, navigator, index, navState) => { return null; },
                Title: (route, navigator, index, navState) =>
                  { return (<Text style={[styles.navigationBarText, styles.titleText]}>{routes[route.index].title}</Text>); },
              }}
@@ -128,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   navigationBar:{
-    backgroundColor: 'blue',
+    backgroundColor: 'purple',
   },
   navigationBarText:{
     color: 'white',
@@ -138,7 +113,17 @@ const styles = StyleSheet.create({
   titleText:{
     fontSize: 20,
     paddingTop:5,
-  }
+  },
+  navbar: {
+    alignItems: 'center',
+    backgroundColor: 'purple',
+    borderBottomColor: '#eee',
+    borderColor: 'transparent',
+    borderWidth: 1,
+    justifyContent: 'center',
+    height: 44,
+    flexDirection: 'row'
+  },
 
 });
 

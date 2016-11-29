@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, AppRegistry, ListView, StyleSheet, Text, View, Image, TextInput, Alert} from 'react-native';
 import *  as firebase from 'firebase';
+import ReqForm from './ReqForm.js';
 
 
 var alertMessage = 'This item must have been borrowed';
@@ -31,7 +32,7 @@ class ItemDetail extends Component{
 
                 <View>
                  <TouchableOpacity style={styles.button} onPress ={
-          ()=>this.props.navigator.push({index:5, passProps:
+          ()=>this.props.navigator.push({index:2, passProps:
             {
               itemID: this.props.itemID,brand: this.props.brand,description: this.props.description, itemType: this.props.itemType, 
               location: this.props.location, model: this.props.model, status: this.props.status

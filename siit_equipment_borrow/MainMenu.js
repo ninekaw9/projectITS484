@@ -16,37 +16,52 @@ class MainMenu extends Component{
       equalToVal: '',
       orderByChild: '',
       searchperformed: false,
+      allitems:[],
+      filtereditems:[],
+      shouldrerender:false,
     };
-    this.items=[];
     this.database = firebase.database();
+    this.storage = firebase.storage();
     this.itemsfirebaseRef = this.database.ref('equipData');
     this.searchandfilter = this.searchandfilter.bind(this);
+    this.getitemsfromfirebase = this.getitemsfromfirebase.bind(this);
+  }
+
+  downloadimg(){
+    storage.child('equipData/'.filename).getDownloadURL().then(function(url) {
+
+  }).catch(function(error) {
+  // Handle any errors
+  });
   }
 
   getitemsfromfirebase(){
 
     if(this.state.searchperformed==true){
-    this.itemsfirebaseRef.orderByChild(this.state.orderByChild).equalTo(this.state.equalToVal).once('value', (snapshot) => {
-      this.setState({items: snapshot.val()});
+    this.itemsfirebaseRef.orderByChild(this.state.orderByChild).equalTo(this.state.equalToVal).on('value', (snapshot) => {
       this.setState({
-         itemsSource: this.state.itemsSource.cloneWithRows(this.state.items),
+        filtereditems: snapshot.val(),
+         itemsSource: this.state.itemsSource.cloneWithRows(this.state.filtereditems),
       });
     })
     }
     else if(this.state.searchperformed==false){
-      this.itemsfirebaseRef.once('value', (snapshot) => {
-      this.setState({items: snapshot.val()});
+      this.itemsfirebaseRef.on('value', (snapshot) => {
+      this.setState({allitems: snapshot.val()});
       this.setState({
-         itemsSource: this.state.itemsSource.cloneWithRows(this.state.items),
+         itemsSource: this.state.itemsSource.cloneWithRows(this.state.allitems),
       });
     })
     }
+    this.setState({shouldrerender:true});
+    console.log(this.state.filtereditems);
+    console.log(this.state.allitems);
+    this.forceUpdate();
   }
 
   componentDidMount(){
     this.getitemsfromfirebase();
   }
-
 
   searchandfilter(searchkey, searchby){
     console.log(searchkey);
@@ -136,6 +151,7 @@ class MainMenu extends Component{
           </View></TouchableOpacity>
           <ListView
             dataSource={this.state.itemsSource}
+            enableEmptySections={true}
             renderRow={this.renderListView.bind(this)} />
         </View>
         );
