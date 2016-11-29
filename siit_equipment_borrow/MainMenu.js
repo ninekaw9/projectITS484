@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TouchableOpacity, AppRegistry, ListView, StyleSheet, Text, View, Image, TextInput} from 'react-native';
+import {TouchableOpacity, AppRegistry, ListView, StyleSheet, Text, View, Image, TextInput, Alert} from 'react-native';
 import *  as firebase from 'firebase';
 class MainMenu extends Component{
 
@@ -24,7 +24,7 @@ class MainMenu extends Component{
     this.storage = firebase.storage();
     this.itemsfirebaseRef = this.database.ref('equipData');
     this.searchandfilter = this.searchandfilter.bind(this);
-    this.getitemsfromfirebase = this.getitemsfromfirebase.bind(this);
+    this.getallitemsfromfirebase = this.getallitemsfromfirebase.bind(this);
   }
 
   downloadimg(){
@@ -35,51 +35,40 @@ class MainMenu extends Component{
   });
   }
 
-  getitemsfromfirebase(){
-
-    if(this.state.searchperformed==true){
-    this.itemsfirebaseRef.orderByChild(this.state.orderByChild).equalTo(this.state.equalToVal).on('value', (snapshot) => {
+  getallitemsfromfirebase(){
+      this.itemsfirebaseRef.once('value', (snapshot) => {
+        console.log('case2');
+        console.log(snapshot.val());
       this.setState({
-        filtereditems: snapshot.val(),
-         itemsSource: this.state.itemsSource.cloneWithRows(this.state.filtereditems),
+        allitems: snapshot.val(),
+         itemsSource: this.state.itemsSource.cloneWithRows(snapshot.val()),
       });
     })
-    }
-    else if(this.state.searchperformed==false){
-      this.itemsfirebaseRef.on('value', (snapshot) => {
-      this.setState({allitems: snapshot.val()});
-      this.setState({
-         itemsSource: this.state.itemsSource.cloneWithRows(this.state.allitems),
-      });
-    })
-    }
-    this.setState({shouldrerender:true});
-    console.log(this.state.filtereditems);
-    console.log(this.state.allitems);
-    this.forceUpdate();
   }
 
   componentDidMount(){
-    this.getitemsfromfirebase();
+    this.getallitemsfromfirebase();
   }
+
+
 
   searchandfilter(searchkey, searchby){
     console.log(searchkey);
     console.log(searchby);
-    if(searchkey!=null){
-    this.setState({
-      searchperformed: true,
-      equalToVal: searchkey,
-      orderByChild: searchby,
-    });
-    }
-    else{
-      this.setState({
-      searchperformed: false,
-    });
-    }
-    console.log(this.state.searchperformed);
-    this.getitemsfromfirebase();
+    this.itemsfirebaseRef.orderByChild(searchby).startAt(searchkey).endAt(searchkey).once('value', (snapshot) => {
+      console.log('case1');
+      console.log(snapshot.val());
+      if(snapshot.val()!=null){
+          this.setState({
+          filtereditems: snapshot.val(),
+          itemsSource: this.state.itemsSource.cloneWithRows(snapshot.val()),
+      });
+      }
+      else{
+        Alert.alert('Error','Did not found what you search for.');
+      }
+      
+    })
   }
 
   renderListView(data){

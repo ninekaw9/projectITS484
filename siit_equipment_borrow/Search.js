@@ -37,10 +37,6 @@ class Search extends Component{
             <TouchableOpacity
             onPress={
                 ()=>{
-                  console.log(this.state.searchkey);
-                  console.log(this.state.searchby);
-                    this.props.callback(this.state.searchkey,this.state.searchby);
-                    this.props.callback(this.state.searchkey,this.state.searchby);
                     this.props.callback(this.state.searchkey,this.state.searchby);
                     this.props.navigator.pop();
                 }
