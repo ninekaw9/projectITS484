@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, AppRegistry, ListView, StyleSheet, Text, View, Image, TextInput, Alert} from 'react-native';
 import *  as firebase from 'firebase';
+var imageurl={
+  
+};
+var tmp='';
 class MainMenu extends Component{
 
     constructor(props) {
@@ -19,19 +23,27 @@ class MainMenu extends Component{
       allitems:[],
       filtereditems:[],
       shouldrerender:false,
+      imageurlbuffer: '',
+      imageurlstate:[],
     };
     this.database = firebase.database();
     this.storage = firebase.storage();
+    this.storageRef = this.storage.ref();
     this.itemsfirebaseRef = this.database.ref('equipData');
     this.searchandfilter = this.searchandfilter.bind(this);
     this.getallitemsfromfirebase = this.getallitemsfromfirebase.bind(this);
+    this.getimageurl = this.getimageurl.bind(this);
+    
   }
 
-  downloadimg(){
-    storage.child('equipData/'.filename).getDownloadURL().then(function(url) {
-
-  }).catch(function(error) {
-  // Handle any errors
+  getimageurl(filename){
+    let imageref='equipData/'+filename+'.jpg';
+    var abc;
+    console.log(imageref);
+    this.storageRef.child(imageref).getDownloadURL().then(function(url) {
+        console.log(url);
+        imageurl[filename]=url;
+        tmp=url;
   });
   }
 
@@ -52,8 +64,12 @@ class MainMenu extends Component{
 
 
 
-  searchandfilter(searchkey, searchby){
-    console.log(searchkey);
+  searchandfilter(searchkey, searchby, resetsearch){
+    if(resetsearch==true){
+      this.getallitemsfromfirebase();
+    }
+    else{
+      console.log(searchkey);
     console.log(searchby);
     this.itemsfirebaseRef.orderByChild(searchby).startAt(searchkey).endAt(searchkey).once('value', (snapshot) => {
       console.log('case1');
@@ -67,11 +83,13 @@ class MainMenu extends Component{
       else{
         Alert.alert('Error','Did not found what you search for.');
       }
-      
     })
+    }
+    
   }
 
   renderListView(data){
+    this.getimageurl(data.itemID);
       return(
         <TouchableOpacity
         onPress={
@@ -97,6 +115,10 @@ class MainMenu extends Component{
           <Text>{data.itemID}</Text>
           <Text>{data.itemType}</Text>
           <Text>{data.location}</Text>
+          <Image
+          style={{width: 100, height: 100}}
+          source={{uri: imageurl[data.itemID]}}
+          />
           <Text>{data.model}</Text>
           <Text>{data.price}</Text>
           <Text>{data.purchasedYear}</Text>
@@ -130,7 +152,7 @@ class MainMenu extends Component{
             index:4, 
             passProps:
             {
-              callback: this.searchandfilter, 
+              callback: this.searchandfilter,
             }})
           }
           ><View style={styles.searchbutton}>

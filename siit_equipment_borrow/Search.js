@@ -44,6 +44,16 @@ class Search extends Component{
             >
             <Text>Perform Search</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+            onPress={
+                ()=>{
+                    this.props.callback('','',true);
+                    this.props.navigator.pop();
+                }
+             }
+            >
+            <Text>Reset Search</Text>
+            </TouchableOpacity>
 
         </View>
         );
