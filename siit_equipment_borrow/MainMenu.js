@@ -4,7 +4,6 @@ import *  as firebase from 'firebase';
 var imageurl={
   
 };
-var tmp='';
 class MainMenu extends Component{
 
     constructor(props) {
@@ -16,15 +15,9 @@ class MainMenu extends Component{
 
     this.state = {
       itemsSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
-      count: 0,
-      equalToVal: '',
-      orderByChild: '',
-      searchperformed: false,
-      allitems:[],
-      filtereditems:[],
-      shouldrerender:false,
-      imageurlbuffer: '',
-      imageurlstate:[],
+     // allitems:[],
+     // filtereditems:[],
+      //imageurlstate:[],
     };
     this.database = firebase.database();
     this.storage = firebase.storage();
@@ -38,21 +31,19 @@ class MainMenu extends Component{
 
   getimageurl(filename){
     let imageref='equipData/'+filename+'.jpg';
-    var abc;
-    console.log(imageref);
+    //console.log(imageref);
     this.storageRef.child(imageref).getDownloadURL().then(function(url) {
-        console.log(url);
+        //console.log(url);
         imageurl[filename]=url;
-        tmp=url;
   });
   }
 
   getallitemsfromfirebase(){
       this.itemsfirebaseRef.once('value', (snapshot) => {
-        console.log('case2');
-        console.log(snapshot.val());
+        //console.log('case2');
+        //console.log(snapshot.val());
       this.setState({
-        allitems: snapshot.val(),
+        //allitems: snapshot.val(),
          itemsSource: this.state.itemsSource.cloneWithRows(snapshot.val()),
       });
     })
@@ -69,14 +60,14 @@ class MainMenu extends Component{
       this.getallitemsfromfirebase();
     }
     else{
-      console.log(searchkey);
-    console.log(searchby);
+      //console.log(searchkey);
+    //console.log(searchby);
     this.itemsfirebaseRef.orderByChild(searchby).startAt(searchkey).endAt(searchkey).once('value', (snapshot) => {
-      console.log('case1');
-      console.log(snapshot.val());
+      //console.log('case1');
+      //console.log(snapshot.val());
       if(snapshot.val()!=null){
           this.setState({
-          filtereditems: snapshot.val(),
+         // filtereditems: snapshot.val(),
           itemsSource: this.state.itemsSource.cloneWithRows(snapshot.val()),
       });
       }
