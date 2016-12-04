@@ -20,9 +20,6 @@ class MainMenu extends Component{
       equalToVal: '',
       orderByChild: '',
       searchperformed: false,
-      allitems:[],
-      filtereditems:[],
-      shouldrerender:false,
       imageurlbuffer: '',
       imageurlstate:[],
       colorStatus :[]
@@ -50,7 +47,6 @@ class MainMenu extends Component{
         console.log('case2');
         console.log(snapshot.val());
       this.setState({
-        allitems: snapshot.val(),
          itemsSource: this.state.itemsSource.cloneWithRows(snapshot.val()),
       });
     })
@@ -84,7 +80,6 @@ class MainMenu extends Component{
       console.log(snapshot.val());
       if(snapshot.val()!=null){
           this.setState({
-          filtereditems: snapshot.val(),
           itemsSource: this.state.itemsSource.cloneWithRows(snapshot.val()),
       });
       }

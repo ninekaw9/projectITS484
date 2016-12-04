@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, AppRegistry, ListView, StyleSheet, Text, View, Image, TextInput, Picker, Dimensions, Switch} from 'react-native';
 import *  as firebase from 'firebase';
-import Camera from 'react-native-camera';
 class Search extends Component{
 
     constructor(props) {
@@ -9,19 +8,34 @@ class Search extends Component{
         this.state = {
             searchkey: '',
             searchby:'brand',
-            checkStatus : false,
+            switchstatus: false,
             };
      }
 
     render(){
-        return (
-        <View style={styles.container}>
-
-          <Text style={{padding: 10,fontSize: 20, fontWeight : 'bold'}}>Search: </Text>
+      if(this.state.searchby=='status'){
+        var componentA=<View style={styles.switch}>
+            <Switch
+              onValueChange={(value) => 
+                {
+                  this.setState({switchstatus:value});
+                }}
+              value={this.state.switchstatus}
+            />
+            <Text style={{fontSize:20,fontWeight:'bold'}}>    Available only</Text>
+            </View>;
+      }
+      else{
+        var componentA=<View><Text style={{padding: 10,fontSize: 20, fontWeight : 'bold'}}>Search: </Text>
           <TextInput style={styles.input}
             value={this.state.searchkey}
             onChangeText={(searchkey) => this.setState({searchkey})}
-            />
+            /></View>;
+
+      }
+        return (
+        <View style={styles.container}>
+            {componentA}
             <Picker
             selectedValue={this.state.searchby}
             onValueChange={(s) => this.setState({searchby: s})}>
@@ -37,18 +51,23 @@ class Search extends Component{
             </Picker>
 
 
-            <View style={styles.switch}>
-            <Switch
-              onValueChange={(value) => this.setState({checkStatus: value})}
-              value={this.state.checkStatus}
-            />
-            <Text style={{fontSize:20,fontWeight:'bold'}}>    Available only</Text>
-            </View>
+            
 
             <TouchableOpacity style={styles.button}
             onPress={
                 ()=>{
-                    this.props.callback(this.state.searchkey,this.state.searchby);
+                  if(this.state.searchby=='status'){
+                      if(this.state.switchstatus==false){
+                        this.props.callback('unavailable',this.state.searchby);
+                      }
+                      else{
+                        this.props.callback('available',this.state.searchby);
+                      }
+                  }
+                  else{
+                      this.props.callback(this.state.searchkey,this.state.searchby);
+                  }
+                    
                     this.props.navigator.pop();
                 }
              }
