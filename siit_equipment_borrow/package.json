@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "firebase": "^3.6.1",
+    "querybase": "^0.4.0",
     "react": "15.3.2",
     "react-native": "0.37.0",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git"

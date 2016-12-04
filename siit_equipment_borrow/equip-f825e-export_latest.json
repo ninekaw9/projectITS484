@@ -1,0 +1,157 @@
+{
+  "borrowData" : {
+    "borrow001" : {
+      "borrowID" : "001",
+      "dateIn" : "3-12-2016",
+      "dateOut" : "10-12-2016",
+      "itemID" : "item002",
+      "userID" : "user002"
+    }
+  },
+  "borrowRequest" : {
+    "0" : {
+      "lastname" : "Sintuprasert",
+      "name" : "Kitti",
+      "studentID" : 5622121212,
+      "userStat" : "bachelor",
+      "year" : 4
+    },
+    "-KY293SfF_72pWbH3iis" : {
+      "itemID" : "7440-109-29060001",
+      "lastname" : "cvju",
+      "name" : "sgbv",
+      "studentID" : "558858555",
+      "userState" : "Bachelor"
+    },
+    "-KY4Eg9Pb1nbtwTy5r79" : {
+      "itemID" : "7440-109-29060001",
+      "lastname" : "Fbfhh",
+      "name" : "Kkk",
+      "studentID" : "54565477757755",
+      "userState" : "Bachelor"
+    }
+  },
+  "equipData" : [ {
+    "brand" : "Toshiba",
+    "description" : "4.5 cube",
+    "imgUrl" : "https://scontent.fbkk2-2.fna.fbcdn.net/v/t1.0-9/15181522_10208768299309579_5259752093465915051_n.jpg?oh=dd2693081311655877712196bbc22754&oe=58B78416",
+    "itemID" : "4110-103-15960002",
+    "itemType" : "fridge",
+    "location" : "ICT Office",
+    "model" : "A1201",
+    "price" : 5029,
+    "purchasedYear" : 1996,
+    "status" : "unavailable"
+  }, {
+    "brand" : "Acer",
+    "description" : "Intel Centrino 1.73 GHz",
+    "imgUrl" : "https://scontent.fbkk2-2.fna.fbcdn.net/v/t1.0-9/15241817_10208768299109574_8692956279802011950_n.jpg?oh=0ddb9878de0ad262dc0f40e1683d7518&oe=58BBBED3",
+    "itemID" : "7440-109-29060001",
+    "itemType" : "Notebook",
+    "location" : "Linux linpus",
+    "model" : "Aspire",
+    "price" : 36663,
+    "purchasedYear" : 2006,
+    "status" : "available"
+  }, {
+    "brand" : "Lenovo",
+    "description" : "Intel single 2.0GHz",
+    "imgUrl" : "https://scontent.fbkk2-2.fna.fbcdn.net/v/t1.0-9/15285011_10208768299229577_5004758835111470019_n.jpg?oh=7eba91f67e51a6541df3f79701a01b88&oe=58BA5705",
+    "itemID" : "7440-109-29070001",
+    "itemType" : "Notebook",
+    "location" : "Networking Lab",
+    "model" : "Y410",
+    "price" : 34133,
+    "purchasedYear" : 2007,
+    "status" : "available"
+  }, {
+    "brand" : "Asus",
+    "description" : "Intel single 2.6 GHz",
+    "imgUrl" : "https://scontent.fbkk2-2.fna.fbcdn.net/v/t1.0-9/15219393_10208768299749590_8761563203653907014_n.jpg?oh=b7e570d12687a825124c2076bdda0aa1&oe=58BB6B96",
+    "itemID" : "7440-109-29070002",
+    "itemType" : "Notebook",
+    "location" : "Networking Lab",
+    "model" : "Zenbook",
+    "price" : 39590,
+    "purchasedYear" : 2007,
+    "status" : "available"
+  }, {
+    "brand" : "Fujitsu",
+    "description" : "Intel 1.8 GHz",
+    "imgUrl" : "https://scontent.fbkk2-2.fna.fbcdn.net/t31.0-8/15259687_10208768299989596_2899109091536025686_o.jpg",
+    "itemID" : "7440-109-29080001",
+    "itemType" : "Notebook",
+    "location" : "Networking Lab",
+    "model" : "U9200",
+    "price" : 33900,
+    "purchasedYear" : 2008,
+    "status" : "available"
+  }, {
+    "brand" : "LG",
+    "description" : "19 inch",
+    "imgUrl" : "https://scontent.fbkk2-2.fna.fbcdn.net/v/t1.0-9/15232338_10208768299949595_425799134863184308_n.jpg?oh=5f8c6d85da108ca50185f82045c810d1&oe=58BE531A",
+    "itemID" : "7440-001-29080001",
+    "itemType" : "monitor",
+    "location" : "Yochi's office",
+    "model" : "T650",
+    "price" : 6200,
+    "purchasedYear" : 2008,
+    "status" : "available"
+  }, {
+    "brand" : "OA Computer",
+    "description" : "2.4 GHz",
+    "imgUrl" : "https://scontent.fbkk2-2.fna.fbcdn.net/t31.0-8/15304417_10208768300349605_3972974575329055687_o.jpg",
+    "itemID" : "7440-117-15020001",
+    "itemType" : "server",
+    "location" : "Graphic lab",
+    "model" : "EZ4",
+    "price" : 47000,
+    "purchasedYear" : 2002,
+    "status" : "available"
+  }, {
+    "brand" : "Cisco",
+    "description" : "2FE,4slots",
+    "imgUrl" : "https://scontent.fbkk2-2.fna.fbcdn.net/v/t1.0-9/15327323_10208768300869618_1612865970928527648_n.jpg?oh=0e44203b0bc94672c90cba44f8a0ddd0&oe=58F6E05E",
+    "itemID" : "7440-500-29050015",
+    "itemType" : "router",
+    "location" : "Networking lab",
+    "model" : "2801",
+    "price" : 63610,
+    "purchasedYear" : 2006,
+    "status" : "available"
+  }, {
+    "brand" : "Maxon",
+    "description" : "Black color",
+    "imgUrl" : "https://scontent.fbkk2-2.fna.fbcdn.net/v/t1.0-9/15220178_10208768301149625_8937087929873914119_n.jpg?oh=053a60ad473e3cc6bcc4144f9d47b4b0&oe=58CCAF8C",
+    "itemID" : "7731-307-15960001",
+    "itemType" : "radio",
+    "location" : "unkonwn",
+    "model" : "CPU-96",
+    "price" : 4500,
+    "purchasedYear" : 1997,
+    "status" : "available"
+  }, {
+    "brand" : "HP",
+    "description" : "600 x 600 dpi",
+    "imgUrl" : "https://scontent.fbkk2-2.fna.fbcdn.net/t31.0-8/15325409_10208768301749640_3461448989433379028_o.jpg",
+    "itemID" : "7440-202-15020004",
+    "itemType" : "printer",
+    "location" : "ICT Office",
+    "model" : "LaserJet",
+    "price" : 23900,
+    "purchasedYear" : 2007,
+    "status" : "available"
+  } ],
+  "userData" : {
+    "user001" : {
+      "password" : 12345678,
+      "userID" : "001",
+      "userName" : "kitti1234"
+    },
+    "user002" : {
+      "password" : "aaa111",
+      "userID" : "002",
+      "userName" : "spaceangza"
+    }
+  }
+}

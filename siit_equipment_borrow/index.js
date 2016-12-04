@@ -15,28 +15,31 @@ import {
   Navigator,
 } from 'react-native';
 import *  as firebase from 'firebase';
-const firebaseConfig = {
+var firebaseConfig = {
     apiKey: "AIzaSyCsVLTT_5zWzeGn0f77xD97k8itJQbEOYU",
     authDomain: "siit-equipment-audit.firebaseapp.com",
     databaseURL: "https://siit-equipment-audit.firebaseio.com",
     storageBucket: "siit-equipment-audit.appspot.com",
     messagingSenderId: "178324219535"
   };
-  firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 import MainMenu from './MainMenu.js';
 import ItemDetail from './ItemDetail.js';
 import About from './About.js';
 import Search from './Search.js';
 import QRReader from './QRReader.js';
 import ReqForm from './ReqForm.js';
+import First from './First.js';
+
   const routes= [
+
     {
-      title: 'Item List',
+      title: 'Main Menu',
       index: 0,
     },
     {
       title: 'Item Detail',
-      index: 1,
+      index: 3,
     },
     {
       title: 'About',
@@ -44,29 +47,33 @@ import ReqForm from './ReqForm.js';
     },
     {
       title: 'Search and Filter',
-      index: 3,
-    },
-    {
-      title: 'Read QR Code',
       index: 4,
     },
     {
-      title: 'Borrow',
+      title: 'Read QR Code',
       index: 5,
     },
+    {
+      title: 'Borrow',
+      index: 6,
+    },
+     {
+      title: 'Item List',
+      index: 1,
+    }
   ]
 export default class siit_equipment_borrow extends Component {
 
   constructor(props){
     super(props);
-    
+
   }
 
   render() {
     return (
       <View style={styles.container}>
       <StatusBar
-          backgroundColor="blue"
+          backgroundColor="purple"
           barStyle="light-content"
         />
         <Navigator
@@ -75,12 +82,13 @@ export default class siit_equipment_borrow extends Component {
           renderScene={
             (route, navigator) => {
               switch (route.index) {
-                case 0: return (<MainMenu navigator={navigator} route={routes[route.index]} {...route.passProps}></MainMenu>);
-                case 1: return (<ItemDetail navigator={navigator} route={routes[route.index]} {...route.passProps}></ItemDetail>);
+                case 1: return (<MainMenu navigator={navigator} route={routes[route.index]} {...route.passProps}></MainMenu>);
+                case 3: return (<ItemDetail navigator={navigator} route={routes[route.index]} {...route.passProps}></ItemDetail>);
                 case 2: return (<About navigator={navigator} route={routes[route.index]} {...route.passProps}></About>);
-                case 3: return (<Search navigator={navigator} route={routes[route.index]} {...route.passProps}></Search>);
-                case 4: return (<QRReader navigator={navigator} route={routes[route.index]} {...route.passProps}></QRReader>);
-                case 5: return (<ReqForm navigator={navigator} route={routes[route.index]} {...route.passProps}></ReqForm>);
+                case 4: return (<Search navigator={navigator} route={routes[route.index]} {...route.passProps}></Search>);
+                case 5: return (<QRReader navigator={navigator} route={routes[route.index]} {...route.passProps}></QRReader>);
+                case 6: return (<ReqForm navigator={navigator} route={routes[route.index]} {...route.passProps}></ReqForm>);
+                case 0: return (<First navigator={navigator} route={routes[route.index]} {...route.passProps}></First>);
               }
             }
           }
@@ -101,7 +109,7 @@ export default class siit_equipment_borrow extends Component {
                    </TouchableHighlight>
                  )
                },
-               RightButton: (route, navigator, index, navState) => { 
+               RightButton: (route, navigator, index, navState) => {
                   if (route.index == 2){
                    return null;
                  }
@@ -128,7 +136,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   navigationBar:{
-    backgroundColor: 'blue',
+    backgroundColor: 'purple',
   },
   navigationBarText:{
     color: 'white',

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TouchableOpacity, AppRegistry, ListView, StyleSheet, Text, View, Image, TextInput, Picker, Dimensions} from 'react-native';
+import {TouchableOpacity, AppRegistry, ListView, StyleSheet, Text, View, Image, TextInput, Picker, Dimensions, Switch} from 'react-native';
 import *  as firebase from 'firebase';
 import Camera from 'react-native-camera';
 class Search extends Component{
@@ -9,6 +9,7 @@ class Search extends Component{
         this.state = {
             searchkey: '',
             searchby:'brand',
+            checkStatus : false,
             };
      }
 
@@ -16,7 +17,7 @@ class Search extends Component{
         return (
         <View style={styles.container}>
 
-          <Text>Search: </Text>
+          <Text style={{padding: 10,fontSize: 20, fontWeight : 'bold'}}>Search: </Text>
           <TextInput style={styles.input}
             value={this.state.searchkey}
             onChangeText={(searchkey) => this.setState({searchkey})}
@@ -28,13 +29,23 @@ class Search extends Component{
             <Picker.Item label="Description" value="description" />
             <Picker.Item label="Item ID" value="itemID" />
             <Picker.Item label="Item Type" value="itemType" />
-            <Picker.Item label="location" value="location" />
-            <Picker.Item label="model" value="model" />
-            <Picker.Item label="price" value="price" />
-            <Picker.Item label="purchasedYear" value="purchasedYear" />
-            <Picker.Item label="status" value="status" />
+            <Picker.Item label="Location" value="location" />
+            <Picker.Item label="Model" value="model" />
+            <Picker.Item label="Price" value="price" />
+            <Picker.Item label="Purchased Year" value="purchasedYear" />
+            <Picker.Item label="Status" value="status" />
             </Picker>
-            <TouchableOpacity
+
+
+            <View style={styles.switch}>
+            <Switch
+              onValueChange={(value) => this.setState({checkStatus: value})}
+              value={this.state.checkStatus}
+            />
+            <Text style={{fontSize:20,fontWeight:'bold'}}>    Available only</Text>
+            </View>
+
+            <TouchableOpacity style={styles.button}
             onPress={
                 ()=>{
                     this.props.callback(this.state.searchkey,this.state.searchby);
@@ -42,9 +53,9 @@ class Search extends Component{
                 }
              }
             >
-            <Text>Perform Search</Text>
+            <Text style={styles.textAvailBut}>Perform Search</Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            <TouchableOpacity style={styles.button}
             onPress={
                 ()=>{
                     this.props.callback('','',true);
@@ -52,7 +63,7 @@ class Search extends Component{
                 }
              }
             >
-            <Text>Reset Search</Text>
+            <Text style={styles.textAvailBut}>Reset Search</Text>
             </TouchableOpacity>
 
         </View>
@@ -69,6 +80,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     padding: 10,
     marginTop: 50,
+  },
+  switch: {
+    flexDirection : 'row'
   },
   input: {
     padding: 10,
@@ -89,6 +103,20 @@ const styles = StyleSheet.create({
     color: '#000',
     padding: 10,
     margin: 40
+  },
+  button:{
+    marginTop:10,
+    backgroundColor: '#33C7FF',
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+
+  },
+  textAvailBut:{
+    textAlign: 'center',
+    fontSize:20,
+    color : 'black',
+    fontWeight :'bold',
   }
 });
 export default Search;

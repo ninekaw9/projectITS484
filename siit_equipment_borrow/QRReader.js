@@ -9,6 +9,7 @@ class QRReader extends Component{
         this.state = {
             searchby:'itemID',
             qrcodereaddata: 'null',
+            successscan:false,
             };
      }
 
@@ -25,8 +26,11 @@ class QRReader extends Component{
           onBarCodeRead={(dataread)=>{
               this.setState({qrcodereaddata:dataread.data});
               if(this.state.qrcodereaddata.indexOf('SIIT')==0){
-                    this.props.callback(this.state.qrcodereaddata.slice(4,),this.state.searchby);
-                    this.props.navigator.pop();
+                  if(this.state.successscan==false){
+                      this.setState({successscan:true});
+                      this.props.callback(this.state.qrcodereaddata.slice(4,),this.state.searchby);
+                      this.props.navigator.pop();
+                  }
               }
           }    
             }

@@ -1,39 +1,72 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, AppRegistry, ListView, StyleSheet, Text, View, Image, TextInput, Alert} from 'react-native';
 import *  as firebase from 'firebase';
+var imageurl={
 
-
+};
+var tmp='';
 var alertMessage = 'This item must have been borrowed';
 
 class ItemDetail extends Component{
      constructor(props) {
         super(props);
-    }
+
+
+        };
+
+        getimageurl(filename){
+          let imageref='equipData/'+filename+'.jpg';
+          var abc;
+          console.log(imageref);
+          this.storageRef.child(imageref).getDownloadURL().then(function(url) {
+              console.log(url);
+              imageurl[filename]=url;
+              tmp=url;
+            });
+        }
+
+
+
 
     render(){
         let ref='MainMenu';
         let status = this.props.status;
 
+
+
+
         if(status === 'available'){
-            
+
         return(
 
             <View style={styles.container}>
-                <View style={styles.PhotoContainer}>
-                    <Text>Picture here</Text>
-                </View>
+                <Image style={styles.PhotoContainer}
+                source={{uri: this.props.imgUrl}}>
+                </Image>
                 <Text style={styles.text}>{this.props.itemType}</Text>
                 <Text style={styles.text}>{this.props.brand}</Text>
-                <Text>model: {this.props.model}</Text>
-                <Text>EquipmentID: {this.props.itemID}</Text>
-                <Text>Description: {this.props.description}</Text>
-                <Text>location: {this.props.location}</Text>
+                <View style={{flexDirection : 'row'}}>
+                  <Text style={{fontWeight : 'bold'}}>Model:  </Text>
+                  <Text >{this.props.model}</Text>
+                </View>
+                <View style={{flexDirection : 'row'}}>
+                  <Text style={{fontWeight : 'bold'}}>Equipment ID:  </Text>
+                  <Text >{this.props.itemID}</Text>
+                </View>
+                <View style={{flexDirection : 'row'}}>
+                  <Text style={{fontWeight : 'bold'}}>Description:  </Text>
+                  <Text >{this.props.description}</Text>
+                </View>
+                <View style={{flexDirection : 'row'}}>
+                  <Text style={{fontWeight : 'bold'}}>Location:  </Text>
+                  <Text >{this.props.location}</Text>
+                </View>
 
                 <View>
                  <TouchableOpacity style={styles.button} onPress ={
-          ()=>this.props.navigator.push({index:5, passProps:
+          ()=>this.props.navigator.push({index:6, passProps:
             {
-              itemID: this.props.itemID,brand: this.props.brand,description: this.props.description, itemType: this.props.itemType, 
+              itemID: this.props.itemID,brand: this.props.brand,description: this.props.description, itemType: this.props.itemType,
               location: this.props.location, model: this.props.model, status: this.props.status
             }})
         }>
@@ -47,15 +80,27 @@ class ItemDetail extends Component{
         else{
           return(
            <View style={styles.container}>
-                <View style={styles.PhotoContainer}>
-                    <Text>Picture here</Text>
-                </View>
+                 <Image style={styles.PhotoContainer}
+                 source={{uri: this.props.imgUrl}}>
+                 </Image>
                 <Text style={styles.text}>{this.props.itemType}</Text>
                 <Text style={styles.text}>{this.props.brand}</Text>
-                <Text>model: {this.props.model}</Text>
-                <Text>EquipmentID: {this.props.itemID}</Text>
-                <Text>Description: {this.props.description}</Text>
-                <Text>location: {this.props.location}</Text>
+                <View style={{flexDirection : 'row'}}>
+                  <Text style={{fontWeight : 'bold'}}>Model:  </Text>
+                  <Text >{this.props.model}</Text>
+                </View>
+                <View style={{flexDirection : 'row'}}>
+                  <Text style={{fontWeight : 'bold'}}>Equipment ID:  </Text>
+                  <Text >{this.props.itemID}</Text>
+                </View>
+                <View style={{flexDirection : 'row'}}>
+                  <Text style={{fontWeight : 'bold'}}>Description:  </Text>
+                  <Text >{this.props.description}</Text>
+                </View>
+                <View style={{flexDirection : 'row'}}>
+                  <Text style={{fontWeight : 'bold'}}>Location:  </Text>
+                  <Text >{this.props.location}</Text>
+                </View>
                 <View>
                  <TouchableOpacity style={styles.Redbutton} onPress={()=>Alert.alert(
             'Unavailable!',
@@ -67,9 +112,10 @@ class ItemDetail extends Component{
               </View>
           );
         }
-      
+
     }
 }
+
 
 
 const styles = StyleSheet.create({
@@ -80,7 +126,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     margin:10,
     borderWidth: 2,
-    borderColor: 'lightblue',
+    borderColor: 'purple',
     borderRadius: 10,
     marginBottom:10
   },
@@ -93,7 +139,7 @@ const styles = StyleSheet.create({
     borderColor: 'lightblue',
     borderRadius: 10,
     marginBottom:5,
-    
+
   },
     text:{
     fontSize:20,
@@ -106,7 +152,7 @@ const styles = StyleSheet.create({
     fontWeight :'bold'
   },
     textUnavail:{
-    fontSize:20,
+    fontSize:15,
     color : 'red',
     fontWeight :'bold'
   },
@@ -116,7 +162,7 @@ const styles = StyleSheet.create({
   button:{
     marginTop:10,
     backgroundColor: '#00e600',
-    padding: 20,
+    padding: 10,
     borderWidth: 1,
     borderRadius: 10,
 
@@ -124,7 +170,7 @@ const styles = StyleSheet.create({
    Redbutton:{
      marginTop:10,
     backgroundColor: '#ff3333',
-    padding: 20,
+    padding: 10,
     borderWidth: 1,
     borderRadius: 10,
 

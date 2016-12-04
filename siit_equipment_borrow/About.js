@@ -10,8 +10,21 @@ class About extends Component{
     render(){
         return (
         <View style={styles.container}>
-          <Text>Made by Kaw, Daeng, Abinaf</Text>
-          <Text>เหนื่อยมาก เลือดตาแทบกระเด็น</Text>
+          <View style={styles.textss}>
+            <Text></Text>
+            <Text></Text>
+            <Text style={{fontSize : 15,fontWeight:'bold'}}>ITS484 Project</Text>
+            <Text style={{fontSize : 15,fontWeight:'bold'}}>School Equipment Auditiing System</Text>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
+            <Text></Text>
+            <Text style={{fontSize : 15}}>Made by</Text>
+            <Text style={{fontSize : 15}}>Kitti Sintuprasert 5622780039</Text>
+            <Text style={{fontSize : 15}}>Pongwanit Jeaperapong 	5622781797</Text>
+            <Text style={{fontSize : 15}}>Abhinaf Singh 	5622793768</Text>
+
+          </View>
         </View>
         );
     }
@@ -26,6 +39,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     padding: 10,
     marginTop: 50,
+  },
+  textss:{
+    padding : 15,
+
+
   },
 });
 export default About;
